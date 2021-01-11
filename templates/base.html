@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    {% block head %}
+        {% block meta %}
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+            <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.ico') }}"/>
+            <meta charset="utf-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+        {% endblock meta %}
+
+        <title>Чеклистер | {% block title %}{% endblock %}</title>
+
+        {% block stylesheets %}
+            <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+        {% endblock stylesheets %}
+    {% endblock head %}
+</head>
+
+<body>
+{% block body %}
+    {% block top_navigation %}
+        <nav class="navbar navbar-expand-md navbar-expand-lg navbar-expand-sm navbar-dark bg-dark">
+            {#            <a class="navbar-brand p-3" href="/"></a>#}
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/">Расписание дня</a>
+            </div>
+        </nav>
+    {% endblock top_navigation %}
+    {% block content %}
+        {{ content }}
+    {% endblock content %}
+
+    {% block javascripts %}
+        <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    {% endblock %}
+{% endblock body %}
+</body>
+</html>

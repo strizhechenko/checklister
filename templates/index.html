@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Работаем{% endblock %}
+
+{% macro myrender(collection) %}
+    <ul>
+        {% if collection is string %}
+            <input type="checkbox" id="{{ collection }}">
+            <label for="{{ collection }}">{{ collection | capitalize}}</label>
+        {% elif collection is mapping %}
+            {% for key, value in collection.items() %}
+                <li><a href="/?key={{ key }}">{{ key | capitalize }}</a></li>
+            {% endfor %}
+        {% else %}
+            {% for item in collection %}
+                {{ myrender(item) }}
+            {% endfor %}
+        {% endif %}
+    </ul>
+{% endmacro %}
+
+{% block content %}
+    <div class="container">
+        <h1>{{ pagename | capitalize }}</h1>
+        {{ myrender(data) }}
+    </div>
+{% endblock %}
