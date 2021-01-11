@@ -4,8 +4,14 @@
 {% macro myrender(collection) %}
     <ul>
         {% if collection is string %}
-            <input type="checkbox" id="{{ collection }}">
-            <label for="{{ collection }}">{{ collection | capitalize}}</label>
+            {% if '|' in collection %}
+                <li>
+                    <a href="{{ collection.split('|')[1] }}" target="_blank">{{ collection.split('|')[0] }}</a>
+                </li>
+            {% else %}
+                <input type="checkbox" id="{{ collection }}">
+                <label for="{{ collection }}">{{ collection | capitalize}}</label>
+            {% endif %}
         {% elif collection is mapping %}
             {% for key, value in collection.items() %}
                 <li><a href="/?key={{ key }}">{{ key | capitalize }}</a></li>
